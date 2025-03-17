@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Global Styles */
 body {
     font-family: "Poppins", sans-serif;
@@ -15,7 +19,7 @@ body {
 .swiper {
     width: 90%;
     height: 450px;
-    overflow: hidden;
+    overflow: visible;
 }
 
 /* Swiper Slide */
@@ -27,6 +31,32 @@ body {
     transition: transform 0.5s ease-in-out;
 }
 
+/* Card Border Animation */
+.swiper-slide::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: conic-gradient(from var(--angle), #A7E752 0%, transparent 30%, transparent 70%, #A7E752 100%);
+    border-radius: 15px;
+    animation: rotate-border 2s linear infinite;
+    z-index: -1;
+}
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotate-border {
+    to {
+        --angle: 360deg;
+    }
+}
+
 /* Slide Image */
 .swiper-slide img {
     width: 100%;
@@ -34,6 +64,7 @@ body {
     object-fit: cover;
     border-radius: 15px;
     transition: transform 0.5s ease-in-out, filter 0.3s ease-in-out;
+    position: relative;
 }
 
 /* Zoom Effect on Hover */
